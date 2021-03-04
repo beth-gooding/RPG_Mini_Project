@@ -37,7 +37,36 @@ class Fire extends Pokemon {
 
 }
 
+
+// ROCK CLASS
+
+class Rock extends Pokemon {
+    constructor () {
+        super("Rock", "rockthrow", "ancientpower", "meteorbeam", "rockwrecker", "player1")
+    }
+
+    rockthrow(target){
+        target.HP = target.HP - 10;
+    }
+    ancientpower(target){
+        target.HP = target.HP - 10;
+    }
+    meteorbeam(target){
+        target.HP = target.HP - 10;
+    }
+    rockwrecker(target){
+        target.HP = target.HP - 10;
+    }
+
+
+}
+
 let firePokemon = new Fire;
 console.log(firePokemon);
 firePokemon.fireball(firePokemon);
 console.log(firePokemon);
+
+let geodude = new Rock;
+console.log(geodude);
+geodude.rockwrecker(firePokemon);
+console.log(firePokemon); // Seems to work for attacking another Pokemon
