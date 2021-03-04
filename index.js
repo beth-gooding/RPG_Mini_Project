@@ -4,6 +4,58 @@
                                                 - each class has different "health point"(HP)
                                                 - 
 */
+import reader from "readline-sync";
+
+let pokemon1 = new Fire;
+
+let pokemon2 = new Rock;
+
+let playing = true;
+
+while (playing == true){
+    //turns 
+}
+
+//pokemon 1's turn
+
+let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
+if (attack == 1){
+    pokemon1.fireball(pokemon2);
+    pokemon2.checkHP();
+} else if (attack == 2){
+    pokemon1.flamethrower(pokemon2);
+} else if (attack == 3) {
+    pokemon1.sacredfire(pokemon2);
+} else if (attack == 4) {
+    pokemon1.blastburn(pokemon2);
+} else {
+    console.log("Choose a number between 1 and 4");
+    let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
+}
+
+//check pokemon2's hp
+if(attack==1){
+pokemon1.fireball(pokemon2), pokemon2.checkHP();
+
+// pokemon 2's turn
+
+
+let attack = Math.floor(Math.random() * 4) + 1;
+if (attack == 1){
+    pokemon2.rockthrow(pokemon1);
+    console.log('Computer used Rock Throw!');
+} else if (attack == 2){
+    pokemon2.ancientpower(pokemon1);
+    console.log('Computer used Ancient Power!');
+} else if (attack == 3) {
+    pokemon2.meteorbeam(pokemon1);
+    console.log('Computer used Meteor Beam');
+} else {
+    pokemon2.rockwrecker(pokemon1);
+    console.log('Computer used Rock Wrecker!');
+} 
+
+//check pokemon1's hp
 
 class Pokemon{
     constructor(type, attack1, attack2, attack3, attack4, player){
@@ -18,6 +70,7 @@ class Pokemon{
     checkHP() {
         let currentHP = this.HP
         if (currentHP <= 0) {
+            playing = false;
             console.log('game over');
         }
     }   
@@ -30,6 +83,7 @@ class Fire extends Pokemon {
     }
     fireball(target){
         target.HP = target.HP - 10;
+        return target.HP;
     }
     flamethrower(target){
         target.HP = target.HP - 10;
@@ -64,7 +118,7 @@ class Rock extends Pokemon {
     rockwrecker(target){
         target.HP = target.HP - 10;
     }
-
+}
 
 class Grass extends Pokemon {
     constructor(){
@@ -81,6 +135,9 @@ class Grass extends Pokemon {
         target.HP = target.HP - 25;
     }
     synthesis(target){
+        target.HP = target.HP - 10;
+    }
+}
 
 //Water pokemon class with moves
 
@@ -105,29 +162,4 @@ class Water extends Pokemon {
 
 
 }
-
-let firePokemon = new Fire;
-
-let grassPokemon = new Grass;
-console.log(grassPokemon);
-firePokemon.fireball(grassPokemon);
-console.log(grassPokemon);
-grassPokemon.leafblade(firePokemon);
-console.log(firePokemon);
-
-console.log(firePokemon);
-firePokemon.fireball(firePokemon);
-console.log(firePokemon);
-
-
-let geodude = new Rock;
-console.log(geodude);
-geodude.rockwrecker(firePokemon);
-console.log(firePokemon); // Seems to work for attacking another Pokemon
-
-
-// water pokemon attacks fire pokemon ~ note damage is updated
-let waterPokemon = new Water;
-waterPokemon.WaterGun(firePokemon);
-console.log(firePokemon);
 
