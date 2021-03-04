@@ -18,7 +18,7 @@ while ((pokemon1.playing) && (pokemon2.playing)){
     let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
 if (attack == 1){
     pokemon1.fireball(pokemon2);
-    pokemon2.checkHP();
+    
 } else if (attack == 2){
     pokemon1.flamethrower(pokemon2);
 } else if (attack == 3) {
@@ -29,13 +29,10 @@ if (attack == 1){
     console.log("Choose a number between 1 and 4");
     let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
 }
+pokemon2.checkHP();
 
-//check pokemon2's hp
-if(attack==1){
-pokemon1.fireball(pokemon2), pokemon2.checkHP();
-}
+
 // pokemon 2's turn
-
 
 let attack2 = Math.floor(Math.random() * 4) + 1;
 if (attack2 == 1){
@@ -51,14 +48,9 @@ if (attack2 == 1){
     pokemon2.rockwrecker(pokemon1);
     console.log('Computer used Rock Wrecker!');
 } 
-    //turns 
+    pokemon1.checkHP();
+
 }
-
-//pokemon 1's turn
-
-
-
-//check pokemon1's hp
 
 
 
