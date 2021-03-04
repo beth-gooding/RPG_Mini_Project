@@ -11,15 +11,11 @@ let pokemon1 = new Fire;
 
 let pokemon2 = new Rock;
 
-let playing = true;
+// let playing = true;
 
-while (playing == true){
-    //turns 
-}
+while (pokemon2.playing == true){
 
-//pokemon 1's turn
-
-let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
+    let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
 if (attack == 1){
     pokemon1.fireball(pokemon2);
     pokemon2.checkHP();
@@ -41,20 +37,26 @@ pokemon1.fireball(pokemon2), pokemon2.checkHP();
 // pokemon 2's turn
 
 
-let attack = Math.floor(Math.random() * 4) + 1;
-if (attack == 1){
+let attack2 = Math.floor(Math.random() * 4) + 1;
+if (attack2 == 1){
     pokemon2.rockthrow(pokemon1);
     console.log('Computer used Rock Throw!');
-} else if (attack == 2){
+} else if (attack2 == 2){
     pokemon2.ancientpower(pokemon1);
     console.log('Computer used Ancient Power!');
-} else if (attack == 3) {
+} else if (attack2 == 3) {
     pokemon2.meteorbeam(pokemon1);
     console.log('Computer used Meteor Beam');
 } else {
     pokemon2.rockwrecker(pokemon1);
     console.log('Computer used Rock Wrecker!');
 } 
+    //turns 
+}
+
+//pokemon 1's turn
+
+
 
 //check pokemon1's hp
 

@@ -1,17 +1,17 @@
 export class Pokemon{
-    constructor(type, attack1, attack2, attack3, attack4, player){
+    constructor(type, attack1, attack2, attack3, attack4, playing){
         this.type = type;
         this.HP = 100;
         this.attack1 = attack1;
         this.attack2 = attack2;
         this.attack3 = attack3;
         this.attack4 = attack4;
-        this.player = player;
+        this.playing = playing;
     }  
     checkHP() {
         let currentHP = this.HP
         if (currentHP <= 0) {
-            playing = false;
+            this.playing = false;
             console.log('game over');
         }
     }   
@@ -19,7 +19,7 @@ export class Pokemon{
 
 export class Fire extends Pokemon {
     constructor(){
-        super('Fire', 'fireball', 'flamethrower', 'sacredfire', 'blastburn');
+        super('Fire', 'fireball', 'flamethrower', 'sacredfire', 'blastburn', true);
                     
     }
     fireball(target){
@@ -44,7 +44,7 @@ export class Fire extends Pokemon {
 
 export class Rock extends Pokemon {
     constructor () {
-        super("Rock", "rockthrow", "ancientpower", "meteorbeam", "rockwrecker", "player1")
+        super("Rock", "rockthrow", "ancientpower", "meteorbeam", "rockwrecker", true)
     }
 
     rockthrow(target){
