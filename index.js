@@ -13,7 +13,7 @@ let pokemon2 = new Rock;
 
 // let playing = true;
 
-while (pokemon2.playing == true){
+while ((pokemon1.playing) && (pokemon2.playing)){
 
     let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
 if (attack == 1){

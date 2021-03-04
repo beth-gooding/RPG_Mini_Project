@@ -12,7 +12,7 @@ export class Pokemon{
         let currentHP = this.HP
         if (currentHP <= 0) {
             this.playing = false;
-            console.log('game over');
+            console.log(`${this.type} is dead. game over`);
         }
     }   
 }
