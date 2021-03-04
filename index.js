@@ -44,6 +44,28 @@ class Fire extends Pokemon {
 }
 
 
+
+// ROCK CLASS
+
+class Rock extends Pokemon {
+    constructor () {
+        super("Rock", "rockthrow", "ancientpower", "meteorbeam", "rockwrecker", "player1")
+    }
+
+    rockthrow(target){
+        target.HP = target.HP - 10;
+    }
+    ancientpower(target){
+        target.HP = target.HP - 10;
+    }
+    meteorbeam(target){
+        target.HP = target.HP - 10;
+    }
+    rockwrecker(target){
+        target.HP = target.HP - 10;
+    }
+
+
 class Grass extends Pokemon {
     constructor(){
         super('Grass', 'spore', 'frenzyplant', 'leafblade', 'synthesis');
@@ -59,7 +81,7 @@ class Grass extends Pokemon {
         target.HP = target.HP - 25;
     }
     synthesis(target){
-=======
+
 //Water pokemon class with moves
 
 class Water extends Pokemon {
@@ -81,6 +103,7 @@ class Water extends Pokemon {
         target.HP = target.HP - 10;
     }
 
+
 }
 
 let firePokemon = new Fire;
@@ -91,10 +114,16 @@ firePokemon.fireball(grassPokemon);
 console.log(grassPokemon);
 grassPokemon.leafblade(firePokemon);
 console.log(firePokemon);
-=======
+
 console.log(firePokemon);
 firePokemon.fireball(firePokemon);
 console.log(firePokemon);
+
+
+let geodude = new Rock;
+console.log(geodude);
+geodude.rockwrecker(firePokemon);
+console.log(firePokemon); // Seems to work for attacking another Pokemon
 
 
 // water pokemon attacks fire pokemon ~ note damage is updated
