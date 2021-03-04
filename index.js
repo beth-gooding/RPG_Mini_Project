@@ -7,50 +7,95 @@
 import reader from "readline-sync";
 import {Pokemon, Fire, Rock, Water, Grass} from "./pokemonModule.js";
 
-let pokemon1 = new Fire;
+function startGame() {
+let playing = true;
+
+//choose player 1 pokemon
+
+let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `);
+
+if (type == 1) {
+    var pokemon1 = new Fire;
+} else if (type == 2) {
+    var pokemon1 = new Water;
+} else if (type == 3) {
+    var pokemon1 = new Grass;
+} else if (type == 4) {
+    var pokemon1 = new Rock;
+} else {
+    console.log("Choose a number between 1 and 4");
+    let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `);
+}
+
+console.log(pokemon1);
 
 let pokemon2 = new Rock;
 
-// let playing = true;
+console.log(pokemon2);
 
-while ((pokemon1.playing) && (pokemon2.playing)){
+//turns
 
-    let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
-if (attack == 1){
-    pokemon1.fireball(pokemon2);
-    
-} else if (attack == 2){
-    pokemon1.flamethrower(pokemon2);
-} else if (attack == 3) {
-    pokemon1.sacredfire(pokemon2);
-} else if (attack == 4) {
-    pokemon1.blastburn(pokemon2);
-} else {
-    console.log("Choose a number between 1 and 4");
-    let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
+while (playing == true){
+    //player 1 turn
+    let attack = reader.question(`Choose your attack - ${pokemon1.attack1}(1), ${pokemon1.attack2}(2), ${pokemon1.attack3}(3), ${pokemon1.attack4}(4): `);
+    if (attack == 1){
+        pokemon1.move1(pokemon2);
+        console.log("You used fireball!");
+    } else if (attack == 2){
+        pokemon1.move2(pokemon2);
+        console.log("You used flamethrower!");
+    } else if (attack == 3) {
+        pokemon1.move3(pokemon2);
+        console.log("You used sacred fire!");
+    } else if (attack == 4) {
+        pokemon1.move4(pokemon2);
+        console.log("You used blast burn!");
+    } else {
+        console.log("Choose a number between 1 and 4");
+        let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
+    }
+
+    //check pokemon 2 hp
+    playing = pokemon2.checkHP();
+
+    //show hp
+    console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}`);
+
+    //computer turn
+    attack = Math.floor(Math.random() * 4) + 1;
+    if (attack == 1){
+        pokemon2.move1(pokemon1);
+        console.log('Computer used Rock Throw!');
+    } else if (attack == 2){
+        pokemon2.move2(pokemon1);
+        console.log('Computer used Ancient Power!');
+    } else if (attack == 3) {
+        pokemon2.move3(pokemon1);
+        console.log('Computer used Meteor Beam');
+    } else {
+        pokemon2.move4(pokemon1);
+        console.log('Computer used Rock Wrecker!');
+    }
+
+    //check pokemon 1 hp
+    playing = pokemon2.checkHP();
+
+    //show hp
+    console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}`);
+
 }
-pokemon2.checkHP();
 
-
-// pokemon 2's turn
-
-let attack2 = Math.floor(Math.random() * 4) + 1;
-if (attack2 == 1){
-    pokemon2.rockthrow(pokemon1);
-    console.log('Computer used Rock Throw!');
-} else if (attack2 == 2){
-    pokemon2.ancientpower(pokemon1);
-    console.log('Computer used Ancient Power!');
-} else if (attack2 == 3) {
-    pokemon2.meteorbeam(pokemon1);
-    console.log('Computer used Meteor Beam');
+let again = reader.question("Would you like another battle? yes/no:")
+if (again == "yes") {
+    startGame();
+} else if (again == "no") {
+    console.log("Thanks for battling!");
 } else {
-    pokemon2.rockwrecker(pokemon1);
-    console.log('Computer used Rock Wrecker!');
-} 
-    pokemon1.checkHP();
+    again = reader.question("Invalid choice. Choose yes/no:");
+}
 
 }
 
+startGame();
 
 

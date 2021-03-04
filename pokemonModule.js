@@ -10,10 +10,13 @@ export class Pokemon{
     }  
     checkHP() {
         let currentHP = this.HP
+        let playing = true;
         if (currentHP <= 0) {
             playing = false;
             console.log('game over');
+            
         }
+        return playing;
     }
     move1(target) {
         let damage = Math.floor(Math.random() * 10) + 10;
@@ -33,6 +36,8 @@ export class Pokemon{
     }   
 }
 
+// Fire class
+
 export class Fire extends Pokemon {
     constructor(){
         super('Fire', 'Fireball', 'Flamethrower', 'Sacred Fire', 'Blastburn');
@@ -42,15 +47,16 @@ export class Fire extends Pokemon {
 }
 
 
-
-// ROCK CLASS
+// Rock Class
 
 export class Rock extends Pokemon {
     constructor () {
-        super("Rock", "Rockthrow", "Ancient Power", "Meteor Beam", "Rock Wrecker", "player1")
+        super('Rock', 'Rock Throw', 'Ancient Power', 'Meteor Beam', 'Rock Wrecker')
     }
 
 }
+
+// Grass class
 
 export class Grass extends Pokemon {
     constructor(){
@@ -64,7 +70,7 @@ export class Grass extends Pokemon {
 
 export class Water extends Pokemon {
     constructor(){
-        super('Water', 'Watergun', 'HydroCannon', 'Surf', 'WaterPulse', 'player1');
+        super('Water', 'Watergun', 'HydroCannon', 'Surf', 'WaterPulse');
                     
     }
   
