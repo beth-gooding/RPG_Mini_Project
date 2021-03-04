@@ -43,6 +43,7 @@ class Fire extends Pokemon {
 
 }
 
+
 class Grass extends Pokemon {
     constructor(){
         super('Grass', 'spore', 'frenzyplant', 'leafblade', 'synthesis');
@@ -58,15 +59,46 @@ class Grass extends Pokemon {
         target.HP = target.HP - 25;
     }
     synthesis(target){
+=======
+//Water pokemon class with moves
+
+class Water extends Pokemon {
+    constructor(){
+        super('Water', 'Watergun', 'HydroCannon', 'Surf', 'WaterPulse', 'player1');
+                    
+    }
+    WaterGun(target){
+        target.HP = target.HP - 10;
+    }
+    HydroCannon(target){
+        target.HP = target.HP - 10;
+    }
+    Surf(target){
+        target.HP = target.HP - 10;
+    }
+    WaterPulse(target){
+
         target.HP = target.HP - 10;
     }
 
 }
 
 let firePokemon = new Fire;
+
 let grassPokemon = new Grass;
 console.log(grassPokemon);
 firePokemon.fireball(grassPokemon);
 console.log(grassPokemon);
 grassPokemon.leafblade(firePokemon);
 console.log(firePokemon);
+=======
+console.log(firePokemon);
+firePokemon.fireball(firePokemon);
+console.log(firePokemon);
+
+
+// water pokemon attacks fire pokemon ~ note damage is updated
+let waterPokemon = new Water;
+waterPokemon.WaterGun(firePokemon);
+console.log(firePokemon);
+
