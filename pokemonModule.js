@@ -1,4 +1,4 @@
-class Pokemon{
+export class Pokemon{
     constructor(type, attack1, attack2, attack3, attack4, player){
         this.type = type;
         this.HP = 100;
@@ -31,4 +31,41 @@ class Pokemon{
         let damage = Math.floor(Math.random() * 20) + 15;
         target.HP = target.HP - damage;
     }   
+}
+
+export class Fire extends Pokemon {
+    constructor(){
+        super('Fire', 'Fireball', 'Flamethrower', 'Sacred Fire', 'Blastburn');
+                    
+    }
+    
+}
+
+
+
+// ROCK CLASS
+
+export class Rock extends Pokemon {
+    constructor () {
+        super("Rock", "Rockthrow", "Ancient Power", "Meteor Beam", "Rock Wrecker", "player1")
+    }
+
+}
+
+export class Grass extends Pokemon {
+    constructor(){
+        super('Grass', 'Spore', 'Frenzyplant', 'Leafblade', 'Synthesis');
+                    
+    }
+   
+}
+
+//Water pokemon class with moves
+
+export class Water extends Pokemon {
+    constructor(){
+        super('Water', 'Watergun', 'HydroCannon', 'Surf', 'WaterPulse', 'player1');
+                    
+    }
+  
 }
