@@ -37,7 +37,35 @@ class Fire extends Pokemon {
 
 }
 
+//Water pokemon class with moves
+
+class Water extends Pokemon {
+    constructor(){
+        super('Water', 'Watergun', 'HydroCannon', 'Surf', 'WaterPulse', 'player1');
+                    
+    }
+    WaterGun(target){
+        target.HP = target.HP - 10;
+    }
+    HydroCannon(target){
+        target.HP = target.HP - 10;
+    }
+    Surf(target){
+        target.HP = target.HP - 10;
+    }
+    WaterPulse(target){
+        target.HP = target.HP - 10;
+    }
+
+}
+
 let firePokemon = new Fire;
 console.log(firePokemon);
 firePokemon.fireball(firePokemon);
+console.log(firePokemon);
+
+
+// water pokemon attacks fire pokemon ~ note damage is updated
+let waterPokemon = new Water;
+waterPokemon.WaterGun(firePokemon);
 console.log(firePokemon);
