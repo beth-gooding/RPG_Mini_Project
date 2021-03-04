@@ -14,12 +14,18 @@ class Pokemon{
         this.attack3 = attack3;
         this.attack4 = attack4;
         this.player = player;
-    }     
+    }  
+    checkHP() {
+        let currentHP = this.HP
+        if (currentHP <= 0) {
+            console.log('game over');
+        }
+    }   
 }
 
 class Fire extends Pokemon {
     constructor(){
-        super('Fire', 'fireball', 'flamethrower', 'sacredfire', 'blastburn', 'player1');
+        super('Fire', 'fireball', 'flamethrower', 'sacredfire', 'blastburn');
                     
     }
     fireball(target){
@@ -37,6 +43,23 @@ class Fire extends Pokemon {
 
 }
 
+
+class Grass extends Pokemon {
+    constructor(){
+        super('Grass', 'spore', 'frenzyplant', 'leafblade', 'synthesis');
+                    
+    }
+    spore(target){
+        target.HP = target.HP - 10;
+    }
+    frenzyplant(target){
+        target.HP = target.HP - 10;
+    }
+    leafblade(target){
+        target.HP = target.HP - 25;
+    }
+    synthesis(target){
+=======
 //Water pokemon class with moves
 
 class Water extends Pokemon {
@@ -54,12 +77,21 @@ class Water extends Pokemon {
         target.HP = target.HP - 10;
     }
     WaterPulse(target){
+
         target.HP = target.HP - 10;
     }
 
 }
 
 let firePokemon = new Fire;
+
+let grassPokemon = new Grass;
+console.log(grassPokemon);
+firePokemon.fireball(grassPokemon);
+console.log(grassPokemon);
+grassPokemon.leafblade(firePokemon);
+console.log(firePokemon);
+=======
 console.log(firePokemon);
 firePokemon.fireball(firePokemon);
 console.log(firePokemon);
@@ -69,3 +101,4 @@ console.log(firePokemon);
 let waterPokemon = new Water;
 waterPokemon.WaterGun(firePokemon);
 console.log(firePokemon);
+
