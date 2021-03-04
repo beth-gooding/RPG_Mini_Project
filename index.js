@@ -15,7 +15,6 @@ let playing = true;
 
 while (playing == true){
     //turns 
-    playing = false;
 }
 
 //pokemon 1's turn
@@ -42,14 +41,14 @@ pokemon1.fireball(pokemon2), pokemon2.checkHP();
 // pokemon 2's turn
 
 
-let attackComp = Math.floor(Math.random() * 4) + 1;
-if (attackComp == 1){
+let attack = Math.floor(Math.random() * 4) + 1;
+if (attack == 1){
     pokemon2.rockthrow(pokemon1);
     console.log('Computer used Rock Throw!');
-} else if (attackComp == 2){
+} else if (attack == 2){
     pokemon2.ancientpower(pokemon1);
     console.log('Computer used Ancient Power!');
-} else if (attackComp == 3) {
+} else if (attack == 3) {
     pokemon2.meteorbeam(pokemon1);
     console.log('Computer used Meteor Beam');
 } else {
