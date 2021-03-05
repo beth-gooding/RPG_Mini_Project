@@ -7,6 +7,36 @@
 import reader from "readline-sync";
 import { Pokemon, Fire, Rock, Water, Grass } from "./pokemonModule.js";
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+  setTimeout(resolve, ms);
+      });
+  }
+
+async function delayTimer(ms) {
+  await sleep(ms)
+}
+
+function playerType() {
+  let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
+
+  if (type == 1) {
+      var pokemon1 = new Fire;
+  } else if (type == 2) {
+      var pokemon1 = new Water;
+  } else if (type == 3) {
+      var pokemon1 = new Grass;
+  } else if (type == 4) {
+      var pokemon1 = new Rock;
+  } else {
+      console.log("Choose a number between 1 and 4\n");
+      playerType();
+  }
+
+  return pokemon1;
+
+}
+
 function playAgain() {
     let again = reader.question("Would you like another battle? yes/no: ");
     if (again == "yes") {
@@ -33,31 +63,14 @@ function chooseGame() {
 
 async function startGame() {
   
-    let playing = true;
-    //choose player 1 pokemon
 
-    let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
+  let playing = true;
+  //choose player 1 pokemon
+  let pokemon1 = playerType();
+console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
 
-    if (type == 1) {
-        var pokemon1 = new Fire("Player 1");
-    } else if (type == 2) {
-        var pokemon1 = new Water("Player1");
-    } else if (type == 3) {
-        var pokemon1 = new Grass("Player 1");
-    } else if (type == 4) {
-        var pokemon1 = new Rock("Player 1");
-    } else {
-        console.log("Choose a number between 1 and 4\n");
-        type;
-    }
-    console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}\n` );
+await delayTimer(1000);
 
-    await sleep(1000)
-    function sleep(ms) {
-        return new Promise((resolve) => {
-            setTimeout(resolve, ms);
-        });
-    }
 
     let pokemonPC = Math.floor(Math.random() * 4) + 1;
     if (pokemonPC == 1) {
@@ -163,6 +176,18 @@ async function startGame() {
 async function twoPlayerGame(){
     let playing = true;
 
+
+    player1turn();
+    //check pokemon 2 hp
+    pokemon2.checkHP();
+    
+    //show hp
+    console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}\n`);
+    if (pokemon2.playing == false){
+      playing = false;
+      playAgain();
+      break;
+
     //choose player 1 pokemon
 
     let type1 = reader.question(`Player 1:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
@@ -178,15 +203,15 @@ async function twoPlayerGame(){
     } else {
         console.log("Choose a number between 1 and 4\n");
         type;
+
     }
     console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}\n` );
 
-    await sleep(1000);
-    function sleep(ms) {
-        return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-        });
-    }
+
+//time gap between turns
+    
+    await delayTimer(1500);
+
 
     //Player 2 chooses pokemon
     let type2 = reader.question(`Player 2:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
@@ -247,17 +272,17 @@ async function twoPlayerGame(){
             break;
         }
 
-        //time gap between turns
-    
-        await sleep(1500)
-        function sleep(ms) {
-            return new Promise((resolve) => {
-                setTimeout(resolve, ms);
-            });
-        }
+
+    await delayTimer(1500);
+
+    if (pokemon1.playing == false) {
+      playing = false;
+      playAgain();
+  }
 
         //Call player2turn
         playerturn(pokemon2, pokemon1);
+
 
         //check pokemon 1 hp
         pokemon1.checkHP();
