@@ -75,11 +75,13 @@ async function startGame() {
 
     //check pokemon 2 hp
     pokemon2.checkHP();
+    
     //show hp
     console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}`);
     if (pokemon2.playing == false){
       playing = false;
       playAgain();
+      break;
     }
 
 //time gap between turns
