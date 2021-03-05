@@ -162,4 +162,3 @@ class Water extends Pokemon {
 
 
 }
-
