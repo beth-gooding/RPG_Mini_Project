@@ -20,8 +20,8 @@ function playAgain() {
   }
 
 function startGame() {
+  
   let playing = true;
-
   //choose player 1 pokemon
 
   let type = reader.question(
@@ -76,17 +76,13 @@ function startGame() {
     }
 
     //check pokemon 2 hp
-    playing = pokemon2.checkHP();
-    
-
+    pokemon2.checkHP();
     //show hp
     console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}`);
-
-
-    // Was trying to exit game using this, but it doesn't work here, still lets computer have another go.
-    /* if (playing == false) {
-        playAgain();
-    } */
+    if (pokemon2.playing == false){
+      playing = false;
+      playAgain();
+    }
 
     //computer turn
     attack = Math.floor(Math.random() * 4) + 1;
@@ -105,12 +101,13 @@ function startGame() {
     }
 
     //check pokemon 1 hp
-    playing = pokemon1.checkHP();
+    pokemon1.checkHP();
 
     //show hp
     console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}`);
 
-    if (playing == false) {
+    if (pokemon1.playing == false) {
+      playing = false;
       playAgain();
   }
 

@@ -1,21 +1,18 @@
 export class Pokemon {
-  constructor(type, attack1, attack2, attack3, attack4, player) {
+  constructor(type, attack1, attack2, attack3, attack4) {
     this.type = type;
     this.HP = 100;
     this.attack1 = attack1;
     this.attack2 = attack2;
     this.attack3 = attack3;
     this.attack4 = attack4;
-    this.player = player;
+    this.playing = true;
   }
   checkHP() {
-    let currentHP = this.HP;
-    let playing = true;
-    if (currentHP <= 0) {
-      playing = false;
+    if (this.HP <= 0) {
+      this.playing = false;
       console.log("game over");
     }
-    return playing;
   }
   move1(target) {
     let damage = Math.floor(Math.random() * 10) + 10;
