@@ -64,12 +64,12 @@ function chooseGame() {
 async function startGame() {
   
 
-  let playing = true;
-  //choose player 1 pokemon
-  let pokemon1 = playerType();
-console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
+    let playing = true;
+    //choose player 1 pokemon
+    let pokemon1 = playerType();
+    console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
 
-await delayTimer(1000);
+    await delayTimer(1000);
 
 
     let pokemonPC = Math.floor(Math.random() * 4) + 1;
@@ -129,13 +129,8 @@ await delayTimer(1000);
 
         //time gap between turns
     
-        await sleep(1500)
-        function sleep(ms) {
-            return new Promise((resolve) => {
-                setTimeout(resolve, ms);
-            });
-        }
-
+        await delayTimer(1500);
+        
 
         //computer turn
         let attackPC = Math.floor(Math.random() * 5);
@@ -177,17 +172,6 @@ async function twoPlayerGame(){
     let playing = true;
 
 
-    player1turn();
-    //check pokemon 2 hp
-    pokemon2.checkHP();
-    
-    //show hp
-    console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}\n`);
-    if (pokemon2.playing == false){
-      playing = false;
-      playAgain();
-      break;
-
     //choose player 1 pokemon
 
     let type1 = reader.question(`Player 1:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
@@ -208,7 +192,7 @@ async function twoPlayerGame(){
     console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}\n` );
 
 
-//time gap between turns
+    //time gap between turns
     
     await delayTimer(1500);
 
@@ -273,12 +257,10 @@ async function twoPlayerGame(){
         }
 
 
-    await delayTimer(1500);
+        await delayTimer(1500);
 
-    if (pokemon1.playing == false) {
-      playing = false;
-      playAgain();
-  }
+    
+    
 
         //Call player2turn
         playerturn(pokemon2, pokemon1);
@@ -297,7 +279,7 @@ async function twoPlayerGame(){
     
         //time gap between turns
         
-        await sleep(1500)
+        await delayTimer(1500)
         
    
     }
