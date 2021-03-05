@@ -82,21 +82,14 @@ function startGame() {
       playAgain();
     }
 
-    //time gap between turns
-    async function init() {
-      console.log(1);
-      await sleep(1500);
-      console.log(2);
-  }
+//time gap between turns
     
-  function sleep(ms) {
-      return new Promise((resolve) => {
-        setTimeout(resolve, ms);
-      });
-  }   
-    
-  await new Promise(resolve => setTimeout(resolve, 1500));
-
+    await sleep(1500)
+    function sleep(ms) {
+    return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+        });
+    }
 
 
     //computer turn
