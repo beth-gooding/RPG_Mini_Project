@@ -17,6 +17,26 @@ async function delayTimer(ms) {
   await sleep(ms)
 }
 
+function playerType() {
+  let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
+
+  if (type == 1) {
+      var pokemon1 = new Fire;
+  } else if (type == 2) {
+      var pokemon1 = new Water;
+  } else if (type == 3) {
+      var pokemon1 = new Grass;
+  } else if (type == 4) {
+      var pokemon1 = new Rock;
+  } else {
+      console.log("Choose a number between 1 and 4\n");
+      playerType();
+  }
+
+  return pokemon1;
+
+}
+
 function playAgain() {
     let again = reader.question("Would you like another battle? yes/no:");
     if (again == "yes") {
@@ -33,21 +53,7 @@ async function startGame() {
   
   let playing = true;
   //choose player 1 pokemon
-
-  let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
-
-if (type == 1) {
-    var pokemon1 = new Fire;
-} else if (type == 2) {
-    var pokemon1 = new Water;
-} else if (type == 3) {
-    var pokemon1 = new Grass;
-} else if (type == 4) {
-    var pokemon1 = new Rock;
-} else {
-    console.log("Choose a number between 1 and 4\n");
-    type;
-}
+  let pokemon1 = playerType();
 console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
 
 await delayTimer(1000);
