@@ -30,31 +30,35 @@ export class Pokemon {
 // Fire class
 
 export class Fire extends Pokemon {
-  constructor() {
+  constructor(player) {
     super("Fire", ["Fireball", "Flamethrower", "Sacred Fire", "Blastburn", "Heal"]);
+    this.player = player;
   }
 }
 
 // Rock Class
 
 export class Rock extends Pokemon {
-  constructor() {
+  constructor(player) {
     super("Rock", ["Rock Throw", "Ancient Power", "Meteor Beam", "Rock Wrecker", "Heal"]);
+    this.player = player;
   }
 }
 
 // Grass class
 
 export class Grass extends Pokemon {
-  constructor() {
+  constructor(player) {
     super("Grass", ["Spore", "Frenzyplant", "Leafblade", "Synthesis", "Heal"]);
+    this.player = player;
   }
 }
 
 //Water pokemon class with moves
 
 export class Water extends Pokemon {
-  constructor() {
+  constructor(player) {
     super("Water", ["Watergun", "HydroCannon", "Surf", "WaterPulse", "Heal"]);
+    this.player = player;
   }
 }

@@ -39,13 +39,13 @@ async function startGame() {
     let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
 
     if (type == 1) {
-        var pokemon1 = new Fire;
+        var pokemon1 = new Fire("Player 1");
     } else if (type == 2) {
-        var pokemon1 = new Water;
+        var pokemon1 = new Water("Player1");
     } else if (type == 3) {
-        var pokemon1 = new Grass;
+        var pokemon1 = new Grass("Player 1");
     } else if (type == 4) {
-        var pokemon1 = new Rock;
+        var pokemon1 = new Rock("Player 1");
     } else {
         console.log("Choose a number between 1 and 4\n");
         type;
@@ -61,13 +61,13 @@ async function startGame() {
 
     let pokemonPC = Math.floor(Math.random() * 4) + 1;
     if (pokemonPC == 1) {
-        var pokemon2 = new Fire;
+        var pokemon2 = new Fire("Computer");
     } else if (pokemonPC == 2) {
-        var pokemon2 = new Water;
+        var pokemon2 = new Water("Computer");
     } else if (pokemonPC == 3) {
-        var pokemon2 = new Grass;
+        var pokemon2 = new Grass("Computer");
     } else if (pokemonPC == 4) {
-        var pokemon2 = new Rock;
+        var pokemon2 = new Rock("Computer");
     };
     console.log(`Computer sent out ${pokemon2.type}\nComputer HP: ${pokemon2.HP}\n`);
 
@@ -168,13 +168,13 @@ async function twoPlayerGame(){
     let type1 = reader.question(`Player 1:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
 
     if (type1 == 1) {
-        var pokemon1 = new Fire;
+        var pokemon1 = new Fire("Player 1");
     } else if (type1 == 2) {
-        var pokemon1 = new Water;
+        var pokemon1 = new Water("Player 1");
     } else if (type1 == 3) {
-        var pokemon1 = new Grass;
+        var pokemon1 = new Grass("Player 1");
     } else if (type1 == 4) {
-        var pokemon1 = new Rock;
+        var pokemon1 = new Rock("Player 1");
     } else {
         console.log("Choose a number between 1 and 4\n");
         type;
@@ -192,50 +192,49 @@ async function twoPlayerGame(){
     let type2 = reader.question(`Player 2:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
 
     if (type2 == 1) {
-        var pokemon2 = new Fire;
+        var pokemon2 = new Fire("Player 2");
     } else if (type2 == 2) {
-        var pokemon2 = new Water;
+        var pokemon2 = new Water("Player 2");
     } else if (type2 == 3) {
-        var pokemon2 = new Grass;
+        var pokemon2 = new Grass("Player 2");
     } else if (type2 == 4) {
-        var pokemon2 = new Rock;
+        var pokemon2 = new Rock("Player 2");
     } else {
         console.log("Choose a number between 1 and 4\n");
         type;
     }
     console.log(`You sent out ${pokemon2.type}\nYour HP: ${pokemon2.HP}\n` );
 
-  //turns
+  
 
     while (playing == true) {
         //player 1 turn
-        function player1turn(){
-        let attack1 = reader.question(`Player 1:\nChoose your attack - ${pokemon1.attacks[0]}(1), ${pokemon1.attacks[1]}(2), ${pokemon1.attacks[2]}(3), ${pokemon1.attacks[3]}(4), ${pokemon1.attacks[4]}(5): `);
+        function playerturn(attacker, target){
+            let attack = reader.question(`${attacker.player}:\nChoose your attack - ${attacker.attacks[0]}(1), ${attacker.attacks[1]}(2), ${attacker.attacks[2]}(3), ${attacker.attacks[3]}(4), ${attacker.attacks[4]}(5): `);
     
-        var after_attack1 = console.log(`You used ${JSON.stringify(pokemon1.attacks[attack1-1])}\n`);
-        switch(attack1) {
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-                pokemon1.moves(pokemon2);
-                break;
-            case '5':
-                pokemon1.healing();
-                break;
-            default:
-                console.log("Choose a number between 1 and 5");
-                player1turn(); 
-                break; 
-        }
+            var after_attack = console.log(`You used ${JSON.stringify(attacker.attacks[attack-1])}\n`);
+            switch(attack) {
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                    attacker.moves(target);
+                    break;
+                case '5':
+                    attacker.healing();
+                    break;
+                default:
+                    console.log("Choose a number between 1 and 5");
+                    player1turn(); 
+                    break;
+             
+            }
     
-    
-        //Text display of attack used by User
-        after_attack1;
+            after_attack;
         }
 
         //call player1 turn
-        player1turn();
+        playerturn(pokemon1, pokemon2);
 
         //check pokemon 2 hp
         pokemon2.checkHP();
@@ -257,35 +256,8 @@ async function twoPlayerGame(){
             });
         }
 
-        //Player 2 turn
-
-        function player2turn(){
-            let attack2 = reader.question(`Player 2:\nChoose your attack - ${pokemon2.attacks[0]}(1), ${pokemon2.attacks[1]}(2), ${pokemon2.attacks[2]}(3), ${pokemon2.attacks[3]}(4), ${pokemon2.attacks[4]}(5): `);
-        
-            var after_attack2 = console.log(`You used ${JSON.stringify(pokemon2.attacks[attack2-1])}\n`);
-            switch(attack2) {
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                    pokemon2.moves(pokemon1);
-                    break;
-                case '5':
-                    pokemon2.healing();
-                    break;
-                default:
-                    console.log("Choose a number between 1 and 5");
-                    player1turn(); 
-                    break; 
-            }
-        
-        
-            //Text display of attack used by User
-            after_attack2;
-        }
-    
         //Call player2turn
-        player2turn();
+        playerturn(pokemon2, pokemon1);
 
         //check pokemon 1 hp
         pokemon1.checkHP();
