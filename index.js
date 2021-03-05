@@ -19,7 +19,7 @@ function playAgain() {
     }
   }
 
-function startGame() {
+async function startGame() {
   
   let playing = true;
   //choose player 1 pokemon
