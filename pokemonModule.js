@@ -16,7 +16,7 @@ export class Pokemon {
     target.HP = target.HP - damage;
   }
   healing() {
-    let health = Math.floor(Math.random() * (100-this.hp)) + 1;
+    let health = Math.floor(Math.random() * 22) + 1;
     this.HP = this.HP + health;
   }
 }
