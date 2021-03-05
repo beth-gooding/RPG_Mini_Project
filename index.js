@@ -56,24 +56,22 @@ function startGame() {
     let attack = reader.question(
       `Choose your attack - ${pokemon1.attack1}(1), ${pokemon1.attack2}(2), ${pokemon1.attack3}(3), ${pokemon1.attack4}(4): `
     );
-    if (attack == 1) {
+    if (attack == 1){
       pokemon1.move1(pokemon2);
-      console.log("You used fireball!");
-    } else if (attack == 2) {
+      console.log(`You used ${pokemon1.attack1}!`);
+  } else if (attack == 2){
       pokemon1.move2(pokemon2);
-      console.log("You used flamethrower!");
-    } else if (attack == 3) {
+      console.log(`You used ${pokemon1.attack2}!`);
+  } else if (attack == 3) {
       pokemon1.move3(pokemon2);
-      console.log("You used sacred fire!");
-    } else if (attack == 4) {
+      console.log(`You used ${pokemon1.attack3}!`);
+  } else if (attack == 4) {
       pokemon1.move4(pokemon2);
-      console.log("You used blast burn!");
-    } else {
+      console.log(`You used ${pokemon1.attack4}!`);
+  } else {
       console.log("Choose a number between 1 and 4");
-      let attack = reader.question(
-        "Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): "
-      );
-    }
+      attack = reader.question(`Choose your attack - ${pokemon1.attack1}(1), ${pokemon1.attack2}(2), ${pokemon1.attack3}(3), ${pokemon1.attack4}(4): `);
+  }
 
     //check pokemon 2 hp
     pokemon2.checkHP();
@@ -83,6 +81,23 @@ function startGame() {
       playing = false;
       playAgain();
     }
+
+    //time gap between turns
+    async function init() {
+      console.log(1);
+      await sleep(1500);
+      console.log(2);
+  }
+    
+  function sleep(ms) {
+      return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+      });
+  }   
+    
+  await new Promise(resolve => setTimeout(resolve, 1500));
+
+
 
     //computer turn
     attack = Math.floor(Math.random() * 4) + 1;
@@ -112,9 +127,6 @@ function startGame() {
   }
 
   }
-
-
-
  
 }
 
