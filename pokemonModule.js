@@ -8,7 +8,7 @@ export class Pokemon {
   checkHP() {
     if (this.HP <= 0) {
       this.playing = false;
-      console.log("game over");
+      console.log(`${this.player} has lost the battle. Game over.`);
     }
   }
   moves(target) {
