@@ -5,161 +5,122 @@
                                                 - 
 */
 import reader from "readline-sync";
+import { Pokemon, Fire, Rock, Water, Grass } from "./pokemonModule.js";
 
-let pokemon1 = new Fire;
+function playAgain() {
+    let again = reader.question("Would you like another battle? yes/no:");
+    if (again == "yes") {
+      startGame();
+    } else if (again == "no") {
+      console.log("Thanks for battling!");
+    } else {
+      console.log("Invalid answer. Type yes or no.");
+      playAgain();
+    }
+  }
 
-let pokemon2 = new Rock;
+async function startGame() {
+  
+  let playing = true;
+  //choose player 1 pokemon
 
-let playing = true;
+  let type = reader.question(
+    `Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `
+  );
 
-while (playing == true){
-    //turns 
-}
-
-//pokemon 1's turn
-
-let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
-if (attack == 1){
-    pokemon1.fireball(pokemon2);
-    pokemon2.checkHP();
-} else if (attack == 2){
-    pokemon1.flamethrower(pokemon2);
-} else if (attack == 3) {
-    pokemon1.sacredfire(pokemon2);
-} else if (attack == 4) {
-    pokemon1.blastburn(pokemon2);
-} else {
+  if (type == 1) {
+    var pokemon1 = new Fire();
+  } else if (type == 2) {
+    var pokemon1 = new Water();
+  } else if (type == 3) {
+    var pokemon1 = new Grass();
+  } else if (type == 4) {
+    var pokemon1 = new Rock();
+  } else {
     console.log("Choose a number between 1 and 4");
-    let attack = reader.question("Choose your attack - Fireball(1), Flamethrower(2), Sacred Fire(3), Blast Burn(4): ");
+    let type = reader.question(
+      `Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `
+    );
+  }
+
+  console.log(pokemon1);
+
+  let pokemon2 = new Rock();
+
+  console.log(pokemon2);
+
+  //turns
+
+  while (playing == true) {
+    //player 1 turn
+    let attack = reader.question(
+      `Choose your attack - ${pokemon1.attack1}(1), ${pokemon1.attack2}(2), ${pokemon1.attack3}(3), ${pokemon1.attack4}(4): `
+    );
+    if (attack == 1){
+      pokemon1.move1(pokemon2);
+      console.log(`You used ${pokemon1.attack1}!`);
+  } else if (attack == 2){
+      pokemon1.move2(pokemon2);
+      console.log(`You used ${pokemon1.attack2}!`);
+  } else if (attack == 3) {
+      pokemon1.move3(pokemon2);
+      console.log(`You used ${pokemon1.attack3}!`);
+  } else if (attack == 4) {
+      pokemon1.move4(pokemon2);
+      console.log(`You used ${pokemon1.attack4}!`);
+  } else {
+      console.log("Choose a number between 1 and 4");
+      attack = reader.question(`Choose your attack - ${pokemon1.attack1}(1), ${pokemon1.attack2}(2), ${pokemon1.attack3}(3), ${pokemon1.attack4}(4): `);
+  }
+
+    //check pokemon 2 hp
+    pokemon2.checkHP();
+    //show hp
+    console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}`);
+    if (pokemon2.playing == false){
+      playing = false;
+      playAgain();
+    }
+
+//time gap between turns
+    
+    await sleep(1500)
+    function sleep(ms) {
+    return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+        });
+    }
+
+
+    //computer turn
+    attack = Math.floor(Math.random() * 4) + 1;
+    if (attack == 1) {
+      pokemon2.move1(pokemon1);
+      console.log("Computer used Rock Throw!");
+    } else if (attack == 2) {
+      pokemon2.move2(pokemon1);
+      console.log("Computer used Ancient Power!");
+    } else if (attack == 3) {
+      pokemon2.move3(pokemon1);
+      console.log("Computer used Meteor Beam");
+    } else {
+      pokemon2.move4(pokemon1);
+      console.log("Computer used Rock Wrecker!");
+    }
+
+    //check pokemon 1 hp
+    pokemon1.checkHP();
+
+    //show hp
+    console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}`);
+
+    if (pokemon1.playing == false) {
+      playing = false;
+      playAgain();
+  }
+
+  }
+ 
 }
 
-//check pokemon2's hp
-if(attack==1){
-pokemon1.fireball(pokemon2), pokemon2.checkHP();
-
-// pokemon 2's turn
-
-
-let attack = Math.floor(Math.random() * 4) + 1;
-if (attack == 1){
-    pokemon2.rockthrow(pokemon1);
-    console.log('Computer used Rock Throw!');
-} else if (attack == 2){
-    pokemon2.ancientpower(pokemon1);
-    console.log('Computer used Ancient Power!');
-} else if (attack == 3) {
-    pokemon2.meteorbeam(pokemon1);
-    console.log('Computer used Meteor Beam');
-} else {
-    pokemon2.rockwrecker(pokemon1);
-    console.log('Computer used Rock Wrecker!');
-} 
-
-//check pokemon1's hp
-
-class Pokemon{
-    constructor(type, attack1, attack2, attack3, attack4, player){
-        this.type = type;
-        this.HP = 100;
-        this.attack1 = attack1;
-        this.attack2 = attack2;
-        this.attack3 = attack3;
-        this.attack4 = attack4;
-        this.player = player;
-    }  
-    checkHP() {
-        let currentHP = this.HP
-        if (currentHP <= 0) {
-            playing = false;
-            console.log('game over');
-        }
-    }   
-}
-
-class Fire extends Pokemon {
-    constructor(){
-        super('Fire', 'fireball', 'flamethrower', 'sacredfire', 'blastburn');
-                    
-    }
-    fireball(target){
-        target.HP = target.HP - 10;
-        return target.HP;
-    }
-    flamethrower(target){
-        target.HP = target.HP - 10;
-    }
-    sacredfire(target){
-        target.HP = target.HP - 10;
-    }
-    blastburn(target){
-        target.HP = target.HP - 10;
-    }
-
-}
-
-
-
-// ROCK CLASS
-
-class Rock extends Pokemon {
-    constructor () {
-        super("Rock", "rockthrow", "ancientpower", "meteorbeam", "rockwrecker", "player1")
-    }
-
-    rockthrow(target){
-        target.HP = target.HP - 10;
-    }
-    ancientpower(target){
-        target.HP = target.HP - 10;
-    }
-    meteorbeam(target){
-        target.HP = target.HP - 10;
-    }
-    rockwrecker(target){
-        target.HP = target.HP - 10;
-    }
-}
-
-class Grass extends Pokemon {
-    constructor(){
-        super('Grass', 'spore', 'frenzyplant', 'leafblade', 'synthesis');
-                    
-    }
-    spore(target){
-        target.HP = target.HP - 10;
-    }
-    frenzyplant(target){
-        target.HP = target.HP - 10;
-    }
-    leafblade(target){
-        target.HP = target.HP - 25;
-    }
-    synthesis(target){
-        target.HP = target.HP - 10;
-    }
-}
-
-//Water pokemon class with moves
-
-class Water extends Pokemon {
-    constructor(){
-        super('Water', 'Watergun', 'HydroCannon', 'Surf', 'WaterPulse', 'player1');
-                    
-    }
-    WaterGun(target){
-        target.HP = target.HP - 10;
-    }
-    HydroCannon(target){
-        target.HP = target.HP - 10;
-    }
-    Surf(target){
-        target.HP = target.HP - 10;
-    }
-    WaterPulse(target){
-
-        target.HP = target.HP - 10;
-    }
-
-
-}
-
+startGame();
