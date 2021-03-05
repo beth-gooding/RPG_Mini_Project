@@ -7,15 +7,15 @@
 import reader from "readline-sync";
 import { Pokemon, Fire, Rock, Water, Grass } from "./pokemonModule.js";
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+  setTimeout(resolve, ms);
+      });
+  }
 
 async function delayTimer(ms) {
   await sleep(ms)
-      function sleep(ms) {
-      return new Promise((resolve) => {
-      setTimeout(resolve, ms);
-          });
-      }
-    }
+}
 
 function playAgain() {
     let again = reader.question("Would you like another battle? yes/no:");
