@@ -14,10 +14,16 @@ export class Pokemon {
   moves(target) {
     let damage = Math.floor(Math.random() * 22) + 8;
     target.HP = target.HP - damage;
+    if (target.HP < 0) {
+      target.HP = 0;
+    }
   }
   healing() {
     let health = Math.floor(Math.random() * 22) + 8;
     this.HP = this.HP + health;
+    if (this.HP > 100) {
+      this.HP = 100;
+    }
   }
 }
 
