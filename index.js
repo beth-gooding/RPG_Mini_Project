@@ -84,9 +84,9 @@ function startGame() {
 
 
     // Was trying to exit game using this, but it doesn't work here, still lets computer have another go.
-    if (playing == false) {
+    /* if (playing == false) {
         playAgain();
-    }
+    } */
 
     //computer turn
     attack = Math.floor(Math.random() * 4) + 1;
@@ -109,11 +109,16 @@ function startGame() {
 
     //show hp
     console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}`);
+
+    if (playing == false) {
+      playAgain();
+  }
+
   }
 
 
 
-  playAgain();
+ 
 }
 
 startGame();
