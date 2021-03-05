@@ -7,6 +7,16 @@
 import reader from "readline-sync";
 import { Pokemon, Fire, Rock, Water, Grass } from "./pokemonModule.js";
 
+
+async function delayTimer(ms) {
+  await sleep(ms)
+      function sleep(ms) {
+      return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+          });
+      }
+    }
+
 function playAgain() {
     let again = reader.question("Would you like another battle? yes/no:");
     if (again == "yes") {
@@ -40,12 +50,7 @@ if (type == 1) {
 }
 console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
 
-await sleep(1000)
-    function sleep(ms) {
-    return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-        });
-    }
+await delayTimer(1000);
 
 let pokemonPC = Math.floor(Math.random() * 4) + 1;
 if (pokemonPC == 1) {
@@ -96,7 +101,7 @@ console.log(`Computer sent out ${pokemon2.type}\nComputer HP: ${pokemon2.HP}`);
     pokemon2.checkHP();
     
     //show hp
-    console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}`);
+    console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}\n`);
     if (pokemon2.playing == false){
       playing = false;
       playAgain();
@@ -105,12 +110,7 @@ console.log(`Computer sent out ${pokemon2.type}\nComputer HP: ${pokemon2.HP}`);
 
 //time gap between turns
     
-    await sleep(1500)
-    function sleep(ms) {
-    return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-        });
-    }
+    await delayTimer(1500);
 
 
     //computer turn
@@ -138,6 +138,8 @@ console.log(`Computer sent out ${pokemon2.type}\nComputer HP: ${pokemon2.HP}`);
 
     //show hp
     console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}\n`);
+
+    await delayTimer(1500);
 
     if (pokemon1.playing == false) {
       playing = false;
