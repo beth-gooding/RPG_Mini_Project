@@ -5,8 +5,8 @@
                                                 - 
 */
 import reader from "readline-sync";
-import { Pokemon, Fire, Rock, Water, Grass } from "./pokemonModule.js";
-import {Game, Player, Timer} from "./gameModule.js";
+//import { Pokemon, Fire, Rock, Water, Grass } from "./pokemonModule.js";
+import {Game, Player, Timer,  Pokemon, Fire, Rock, Water, Grass } from "./gameModule.js";
 
 /*
 function sleep(ms) {

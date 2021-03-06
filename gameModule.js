@@ -1,3 +1,6 @@
+import reader from "readline-sync";
+
+
 export class Game {
     constructor() {
         this.timer1000 = new Timer(1000);
@@ -8,8 +11,10 @@ export class Game {
   
         let playing = true;
         //choose player 1 pokemon
-        let pokemon1 = this.playerType();
-        console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
+        let player1 = new Player;
+        let pokemon1 = player1.playerType();
+        console.log(pokemon1);
+        console.log(`You sent out ${this.pokemon1.type}\nYour HP: ${this.pokemon1.HP}` );
         
         
         await this.timer1000.delayTimer();
@@ -228,10 +233,6 @@ export class Game {
             this.playAgain();
         }
     }
-
-    start() {
-        this.chooseGame();
-    }
 }
 
 
@@ -245,19 +246,19 @@ export class Player {
         let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
       
         if (type == 1) {
-            var pokemon1 = new Fire;
+            var pokemon = new Fire;
         } else if (type == 2) {
-            var pokemon1 = new Water;
+            var pokemon = new Water;
         } else if (type == 3) {
-            var pokemon1 = new Grass;
+            var pokemon = new Grass;
         } else if (type == 4) {
-            var pokemon1 = new Rock;
+            var pokemon = new Rock;
         } else {
             console.log("Choose a number between 1 and 4\n");
             this.playerType();
         }
       
-        return pokemon1;
+        return pokemon;
       
       }
 
@@ -293,11 +294,77 @@ export class Timer {
     }
       
       async delayTimer() {
-        function sleep() {
+        async function sleep(duration) {
             return new Promise((resolve) => {
-            setTimeout(resolve, this.ms);
+            setTimeout(resolve, duration);
                 });
             }
         await sleep(this.ms);
       }
 }
+
+export class Pokemon {
+    constructor(type, attacks = [attack1, attack2, attack3, attack4, healing]) {
+      this.type = type;
+      this.HP = 100;
+      this.attacks = attacks;
+      this.playing = true;
+    }
+    checkHP() {
+      if (this.HP <= 0) {
+        this.playing = false;
+        console.log(`${this.player} has lost the battle. Game over.`);
+      }
+    }
+    moves(target) {
+      let damage = Math.floor(Math.random() * 22) + 8;
+      target.HP = target.HP - damage;
+      if (target.HP < 0) {
+        target.HP = 0;
+      }
+    }
+    healing() {
+      let health = Math.floor(Math.random() * 22) + 1;
+      this.HP = this.HP + health;
+      if (this.HP > 100) {
+        this.HP = 100;
+      }
+    }
+  }
+  
+  // Fire class
+  
+  export class Fire extends Pokemon {
+    constructor(player) {
+      super("Fire", ["Fireball", "Flamethrower", "Sacred Fire", "Blastburn", "Heal"]);
+      this.player = player;
+    }
+  }
+  
+  // Rock Class
+  
+  export class Rock extends Pokemon {
+    constructor(player) {
+      super("Rock", ["Rock Throw", "Ancient Power", "Meteor Beam", "Rock Wrecker", "Heal"]);
+      this.player = player;
+    }
+  }
+  
+  // Grass class
+  
+  export class Grass extends Pokemon {
+    constructor(player) {
+      super("Grass", ["Spore", "Frenzyplant", "Leafblade", "Synthesis", "Heal"]);
+      this.player = player;
+    }
+  }
+  
+  //Water pokemon class with moves
+  
+  export class Water extends Pokemon {
+    constructor(player) {
+      super("Water", ["Watergun", "HydroCannon", "Surf", "WaterPulse", "Heal"]);
+      this.player = player;
+    }
+  }
+  
