@@ -1,45 +1,57 @@
 import reader from "readline-sync";
 
-
 export class Game {
     constructor() {
         this.timer1000 = new Timer(1000);
         this.timer1500 = new Timer(1500);
+        this.player1 = new Player;
+        //this.pokemon1 = this.player1.playerType();
+        this.playing = true;
+        this.gameType;
     }
 
     async  startGame() {
-  
-        let playing = true;
-        //choose player 1 pokemon
-        let player1 = new Player;
-        let pokemon1 = player1.playerType();
-        console.log(pokemon1.type);
+        let pokemon1 = this.player1.playerType();
         console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
         
         
         await this.timer1000.delayTimer();
     
+        if (this.gameType == "1 Player") {
+            let pokemonPC = Math.floor(Math.random() * 4) + 1;
+            if (pokemonPC == 1) {
+                var pokemon2 = new Fire("Computer");
+            } else if (pokemonPC == 2) {
+                var pokemon2 = new Water("Computer");
+            } else if (pokemonPC == 3) {
+                var pokemon2 = new Grass("Computer");
+            } else if (pokemonPC == 4) {
+                var pokemon2 = new Rock("Computer");
+            };
+            console.log(`Computer sent out ${pokemon2.type}\nComputer HP: ${pokemon2.HP}\n`);
+        } else if (this.gameType == "2 Player") {
+            let type2 = reader.question(`Player 2:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
     
-        let pokemonPC = Math.floor(Math.random() * 4) + 1;
-        if (pokemonPC == 1) {
-            var pokemon2 = new Fire("Computer");
-        } else if (pokemonPC == 2) {
-            var pokemon2 = new Water("Computer");
-        } else if (pokemonPC == 3) {
-            var pokemon2 = new Grass("Computer");
-        } else if (pokemonPC == 4) {
-            var pokemon2 = new Rock("Computer");
-        };
-        console.log(`Computer sent out ${pokemon2.type}\nComputer HP: ${pokemon2.HP}\n`);
+        if (type2 == 1) {
+            var pokemon2 = new Fire("Player 2");
+        } else if (type2 == 2) {
+            var pokemon2 = new Water("Player 2");
+        } else if (type2 == 3) {
+            var pokemon2 = new Grass("Player 2");
+        } else if (type2 == 4) {
+            var pokemon2 = new Rock("Player 2");
+        } else {
+            console.log("Choose a number between 1 and 4\n");
+            type;
+        }
+        console.log(`You sent out ${pokemon2.type}\nYour HP: ${pokemon2.HP}\n` );
+        }
     
         //turns
-        while (playing == true) {
+        while (this.playing == true) {
     
             //player 1 turn
-
-    
-    
-            player1.player1turn(pokemon1, pokemon2);
+            this.player1.player1turn(pokemon1, pokemon2);
     
             //check pokemon 2 hp
             pokemon2.checkHP();
@@ -47,7 +59,7 @@ export class Game {
             //show hp
             console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}\n`);
             if (pokemon2.playing == false){
-                playing = false;
+                this.playing = false;
                 this.playAgain();
                 break;
             }
@@ -85,7 +97,7 @@ export class Game {
             console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}\n`);
     
             if (pokemon1.playing == false) {
-                playing = false;
+                this.playing = false;
                 this.playAgain();
             }
     
@@ -213,8 +225,10 @@ export class Game {
     chooseGame() {
         let choice = reader.question("Would you like to player 1-player (1) or 2-player (2)?: ");
         if (choice == '1') {
+            this.gameType = "1 Player";
             this.startGame();
         } else if (choice == '2') {
+            this.gameType = "2 Player";
             this.twoPlayerGame();
         } else {
             console.log("Invalid answer. Type 1 or 2.")
@@ -263,7 +277,7 @@ export class Player {
       }
 
       player1turn(pokemon1, pokemon2){
-        let attack = reader.question(`Choose your attack - ${pokemon1.attacks[0]}(1), ${pokemon1.attacks[1]}(2), ${pokemon1.attacks[2]}(3), ${pokemon1.attacks[3]}(4), ${pokemon1.attacks[4]}(5): `);
+        let attack = reader.question(`Player 1: \nChoose your attack - ${pokemon1.attacks[0]}(1), ${pokemon1.attacks[1]}(2), ${pokemon1.attacks[2]}(3), ${pokemon1.attacks[3]}(4), ${pokemon1.attacks[4]}(5): `);
 
         var after_attack = console.log(`You used ${JSON.stringify(pokemon1.attacks[attack-1])}\n`);
         switch(attack) {
