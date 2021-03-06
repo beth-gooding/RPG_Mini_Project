@@ -13,8 +13,8 @@ export class Game {
         //choose player 1 pokemon
         let player1 = new Player;
         let pokemon1 = player1.playerType();
-        console.log(pokemon1);
-        console.log(`You sent out ${this.pokemon1.type}\nYour HP: ${this.pokemon1.HP}` );
+        console.log(pokemon1.type);
+        console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
         
         
         await this.timer1000.delayTimer();
@@ -39,7 +39,7 @@ export class Game {
 
     
     
-            this.player1turn();
+            player1.player1turn(pokemon1, pokemon2);
     
             //check pokemon 2 hp
             pokemon2.checkHP();
@@ -262,7 +262,7 @@ export class Player {
       
       }
 
-      player1turn(){
+      player1turn(pokemon1, pokemon2){
         let attack = reader.question(`Choose your attack - ${pokemon1.attacks[0]}(1), ${pokemon1.attacks[1]}(2), ${pokemon1.attacks[2]}(3), ${pokemon1.attacks[3]}(4), ${pokemon1.attacks[4]}(5): `);
 
         var after_attack = console.log(`You used ${JSON.stringify(pokemon1.attacks[attack-1])}\n`);
