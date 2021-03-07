@@ -12,9 +12,8 @@ export class Game {
     }
 
     async  startGame() {
-        console.log(this.player1.playerType("Player 1"))
-        //let pokemon1 = this.player1.playerType("Player 1");
-        console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
+        let pokemon1 = this.player1.playerType("Player 1");
+        console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}\n` );
         
         
         await this.timer1000.delayTimer();
@@ -94,6 +93,8 @@ export class Game {
                 this.playing = false;
                 this.playAgain();
             }
+
+            await this.timer1500.delayTimer();
     
         }
      
@@ -127,7 +128,7 @@ export class Game {
     }
 }
 
-
+// Player Class
 
 export class Player {
     constructor() {
@@ -147,7 +148,7 @@ export class Player {
             var pokemon = new Rock(playerID);
         } else {
             console.log("Choose a number between 1 and 4\n");
-            this.playerType(playerID);
+            var pokemon = this.playerType(playerID);
         }
       
         return pokemon;
@@ -179,6 +180,8 @@ export class Player {
     }
 }
 
+//Timer Class
+
 export class Timer {
     constructor(ms) {
         this.ms = ms;
@@ -194,12 +197,15 @@ export class Timer {
       }
 }
 
+// Pokemon class
+
 export class Pokemon {
-    constructor(type, attacks = [attack1, attack2, attack3, attack4, healing]) {
+    constructor(type, attacks = [attack1, attack2, attack3, attack4, healing], player) {
       this.type = type;
       this.HP = 100;
       this.attacks = attacks;
       this.playing = true;
+      this.player = player;
     }
     checkHP() {
       if (this.HP <= 0) {
@@ -227,8 +233,8 @@ export class Pokemon {
   
   export class Fire extends Pokemon {
     constructor(player) {
-      super("Fire", ["Fireball", "Flamethrower", "Sacred Fire", "Blastburn", "Heal"]);
-      this.player = player;
+      super("Fire", ["Fireball", "Flamethrower", "Sacred Fire", "Blastburn", "Heal"], player);
+      
     }
   }
   
@@ -236,8 +242,7 @@ export class Pokemon {
   
   export class Rock extends Pokemon {
     constructor(player) {
-      super("Rock", ["Rock Throw", "Ancient Power", "Meteor Beam", "Rock Wrecker", "Heal"]);
-      this.player = player;
+      super("Rock", ["Rock Throw", "Ancient Power", "Meteor Beam", "Rock Wrecker", "Heal"], player);
     }
   }
   
@@ -245,8 +250,7 @@ export class Pokemon {
   
   export class Grass extends Pokemon {
     constructor(player) {
-      super("Grass", ["Spore", "Frenzyplant", "Leafblade", "Synthesis", "Heal"]);
-      this.player = player;
+      super("Grass", ["Spore", "Frenzyplant", "Leafblade", "Synthesis", "Heal"], player); 
     }
   }
   
@@ -254,8 +258,7 @@ export class Pokemon {
   
   export class Water extends Pokemon {
     constructor(player) {
-      super("Water", ["Watergun", "HydroCannon", "Surf", "WaterPulse", "Heal"]);
-      this.player = player;
+      super("Water", ["Watergun", "HydroCannon", "Surf", "WaterPulse", "Heal"], player);
     }
   }
   
