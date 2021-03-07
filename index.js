@@ -17,25 +17,27 @@ async function delayTimer(ms) {
   await sleep(ms)
 }
 
-function playerType() {
+// EDITS HERE TO FIX PLAYERTYPE FUNCTION, FROM THIS LINE...
+function playerType(playerID) {
   let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
 
   if (type == 1) {
-      var pokemon1 = new Fire;
+      var pokemon1 = new Fire(playerID);
   } else if (type == 2) {
-      var pokemon1 = new Water;
+      var pokemon1 = new Water(playerID);
   } else if (type == 3) {
-      var pokemon1 = new Grass;
+      var pokemon1 = new Grass(playerID);
   } else if (type == 4) {
-      var pokemon1 = new Rock;
+      var pokemon1 = new Rock(playerID);
   } else {
       console.log("Choose a number between 1 and 4\n");
-      playerType();
+      var pokemon1 = playerType(playerID);
   }
 
   return pokemon1;
 
 }
+// TO THIS LINE!
 
 function playAgain() {
     let again = reader.question("Would you like another battle? yes/no: ");
@@ -66,7 +68,7 @@ async function startGame() {
 
     let playing = true;
     //choose player 1 pokemon
-    let pokemon1 = playerType();
+    let pokemon1 = playerType("Player 1"); // THIS WAS EDITED!
     console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
 
     await delayTimer(1000);
@@ -171,24 +173,10 @@ async function startGame() {
 async function twoPlayerGame(){
     let playing = true;
 
-
+    //EDITS HERE TO FIX CHOOSING TYPE OF POKEMON, FROM THIS LINE ...
     //choose player 1 pokemon
-
-    let type1 = reader.question(`Player 1:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
-
-    if (type1 == 1) {
-        var pokemon1 = new Fire("Player 1");
-    } else if (type1 == 2) {
-        var pokemon1 = new Water("Player 1");
-    } else if (type1 == 3) {
-        var pokemon1 = new Grass("Player 1");
-    } else if (type1 == 4) {
-        var pokemon1 = new Rock("Player 1");
-    } else {
-        console.log("Choose a number between 1 and 4\n");
-        type;
-
-    }
+    console.log("Player 1:");
+    let pokemon1 = playerType("Player 1");
     console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}\n` );
 
 
@@ -198,26 +186,14 @@ async function twoPlayerGame(){
 
 
     //Player 2 chooses pokemon
-    let type2 = reader.question(`Player 2:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
-
-    if (type2 == 1) {
-        var pokemon2 = new Fire("Player 2");
-    } else if (type2 == 2) {
-        var pokemon2 = new Water("Player 2");
-    } else if (type2 == 3) {
-        var pokemon2 = new Grass("Player 2");
-    } else if (type2 == 4) {
-        var pokemon2 = new Rock("Player 2");
-    } else {
-        console.log("Choose a number between 1 and 4\n");
-        type;
-    }
-    console.log(`You sent out ${pokemon2.type}\nYour HP: ${pokemon2.HP}\n` );
-
+    console.log("Player 2:");
+    let pokemon2 = playerType("Player 2");
+    // ... TO THIS LINE!
   
 
     while (playing == true) {
         //player 1 turn
+        // EDITS HERE TO FIX PLAYERTURN, FROM THIS LINE ...
         function playerturn(attacker, target){
             let attack = reader.question(`${attacker.player}:\nChoose your attack - ${attacker.attacks[0]}(1), ${attacker.attacks[1]}(2), ${attacker.attacks[2]}(3), ${attacker.attacks[3]}(4), ${attacker.attacks[4]}(5): `);
     
@@ -234,13 +210,14 @@ async function twoPlayerGame(){
                     break;
                 default:
                     console.log("Choose a number between 1 and 5");
-                    player1turn(); 
+                    playerturn(attacker, target); 
                     break;
              
             }
     
             after_attack;
         }
+        // ... TO THIS LINE
 
         //call player1 turn
         playerturn(pokemon1, pokemon2);
