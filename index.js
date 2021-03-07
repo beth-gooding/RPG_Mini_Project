@@ -30,7 +30,7 @@ function playerType() {
       var pokemon1 = new Rock;
   } else {
       console.log("Choose a number between 1 and 4\n");
-      playerType();
+      var pokemon1 = playerType();
   }
 
   return pokemon1;
