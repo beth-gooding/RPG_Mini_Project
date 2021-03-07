@@ -238,7 +238,7 @@ async function twoPlayerGame(){
                     break;
                 default:
                     console.log("Choose a number between 1 and 5");
-                    player1turn(); 
+                    playerturn(attacker, target); 
                     break;
              
             }
