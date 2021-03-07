@@ -17,20 +17,20 @@ async function delayTimer(ms) {
   await sleep(ms)
 }
 
-function playerType() {
+function playerType(playerID) {
   let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
 
   if (type == 1) {
-      var pokemon1 = new Fire;
+      var pokemon1 = new Fire(playerID);
   } else if (type == 2) {
-      var pokemon1 = new Water;
+      var pokemon1 = new Water(playerID);
   } else if (type == 3) {
-      var pokemon1 = new Grass;
+      var pokemon1 = new Grass(playerID);
   } else if (type == 4) {
-      var pokemon1 = new Rock;
+      var pokemon1 = new Rock(playerID);
   } else {
       console.log("Choose a number between 1 and 4\n");
-      var pokemon1 = playerType();
+      var pokemon1 = playerType(playerID);
   }
 
   return pokemon1;
@@ -66,7 +66,7 @@ async function startGame() {
 
     let playing = true;
     //choose player 1 pokemon
-    let pokemon1 = playerType();
+    let pokemon1 = playerType("Player 1");
     console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
 
     await delayTimer(1000);
@@ -173,8 +173,9 @@ async function twoPlayerGame(){
 
 
     //choose player 1 pokemon
-
-    let type1 = reader.question(`Player 1:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
+    console.log("Player 1:");
+    let pokemon1 = playerType("Player 1");
+    /*let type1 = reader.question(`Player 1:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
 
     if (type1 == 1) {
         var pokemon1 = new Fire("Player 1");
@@ -188,7 +189,7 @@ async function twoPlayerGame(){
         console.log("Choose a number between 1 and 4\n");
         type;
 
-    }
+    } */
     console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}\n` );
 
 
@@ -198,7 +199,9 @@ async function twoPlayerGame(){
 
 
     //Player 2 chooses pokemon
-    let type2 = reader.question(`Player 2:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
+    console.log("Player 2:");
+    let pokemon2 = playerType("Player 2");
+    /*let type2 = reader.question(`Player 2:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
 
     if (type2 == 1) {
         var pokemon2 = new Fire("Player 2");
@@ -213,6 +216,7 @@ async function twoPlayerGame(){
         type;
     }
     console.log(`You sent out ${pokemon2.type}\nYour HP: ${pokemon2.HP}\n` );
+    */
 
   
 
