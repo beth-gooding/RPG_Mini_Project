@@ -63,6 +63,31 @@ function chooseGame() {
     }
 }
 
+function playerturn(attacker, target){
+    let attack = reader.question(`${attacker.player}:\nChoose your attack - ${attacker.attacks[0]}(1), ${attacker.attacks[1]}(2), ${attacker.attacks[2]}(3), ${attacker.attacks[3]}(4), ${attacker.attacks[4]}(5): `);
+
+    var after_attack = console.log(`You used ${JSON.stringify(attacker.attacks[attack-1])}\n`);
+    switch(attack) {
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+            attacker.moves(target);
+            break;
+        case '5':
+            attacker.healing();
+            break;
+        default:
+            console.log("Choose a number between 1 and 5");
+            playerturn(attacker, target); 
+            break;
+     
+    }
+
+    after_attack;
+}
+
+
 async function startGame() {
   
 
@@ -89,34 +114,8 @@ async function startGame() {
     //turns
     while (playing == true) {
 
-        //player 1 turn
-        function player1turn(){
-            let attack = reader.question(`Choose your attack - ${pokemon1.attacks[0]}(1), ${pokemon1.attacks[1]}(2), ${pokemon1.attacks[2]}(3), ${pokemon1.attacks[3]}(4), ${pokemon1.attacks[4]}(5): `);
-    
-            var after_attack = console.log(`You used ${JSON.stringify(pokemon1.attacks[attack-1])}\n`);
-            switch(attack) {
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                    pokemon1.moves(pokemon2);
-                    break;
-                case '5':
-                    pokemon1.healing();
-                    break;
-                default:
-                    console.log("Choose a number between 1 and 5");
-                    player1turn(); 
-                    break; 
-            }
-    
-    
-            //Text display of attack used by User
-            after_attack;
-        }
 
-
-        player1turn();
+        playerturn(pokemon1, pokemon2);
 
         //check pokemon 2 hp
         pokemon2.checkHP();
@@ -193,31 +192,8 @@ async function twoPlayerGame(){
 
     while (playing == true) {
         //player 1 turn
-        // EDITS HERE TO FIX PLAYERTURN, FROM THIS LINE ...
-        function playerturn(attacker, target){
-            let attack = reader.question(`${attacker.player}:\nChoose your attack - ${attacker.attacks[0]}(1), ${attacker.attacks[1]}(2), ${attacker.attacks[2]}(3), ${attacker.attacks[3]}(4), ${attacker.attacks[4]}(5): `);
-    
-            var after_attack = console.log(`You used ${JSON.stringify(attacker.attacks[attack-1])}\n`);
-            switch(attack) {
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                    attacker.moves(target);
-                    break;
-                case '5':
-                    attacker.healing();
-                    break;
-                default:
-                    console.log("Choose a number between 1 and 5");
-                    playerturn(attacker, target); 
-                    break;
-             
-            }
-    
-            after_attack;
-        }
-        // ... TO THIS LINE
+        
+ 
 
         //call player1 turn
         playerturn(pokemon1, pokemon2);
