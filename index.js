@@ -10,8 +10,9 @@ import { Pokemon, Fire, Rock, Water, Grass } from "./pokemonModule.js";
 function sleep(ms) {
   return new Promise((resolve) => {
   setTimeout(resolve, ms);
-      });
-  }
+    });
+}
+
 
 async function delayTimer(ms) {
   await sleep(ms)
