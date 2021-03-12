@@ -17,7 +17,7 @@ async function delayTimer(ms) {
   await sleep(ms)
 }
 
-// EDITS HERE TO FIX PLAYERTYPE FUNCTION, FROM THIS LINE...
+
 function playerType(playerID) {
   let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
 
@@ -35,9 +35,8 @@ function playerType(playerID) {
   }
 
   return pokemon1;
-
 }
-// TO THIS LINE!
+
 
 function playAgain() {
     let again = reader.question("Would you like another battle? yes/no: ");
@@ -63,12 +62,37 @@ function chooseGame() {
     }
 }
 
+function playerturn(attacker, target){
+    let attack = reader.question(`${attacker.player}:\nChoose your attack - ${attacker.attacks[0]}(1), ${attacker.attacks[1]}(2), ${attacker.attacks[2]}(3), ${attacker.attacks[3]}(4), ${attacker.attacks[4]}(5): `);
+
+    var after_attack = console.log(`You used ${JSON.stringify(attacker.attacks[attack-1])}\n`);
+    switch(attack) {
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+            attacker.moves(target);
+            break;
+        case '5':
+            attacker.healing();
+            break;
+        default:
+            console.log("Choose a number between 1 and 5");
+            playerturn(attacker, target); 
+            break;
+     
+    }
+
+    after_attack;
+}
+
+
 async function startGame() {
   
 
     let playing = true;
     //choose player 1 pokemon
-    let pokemon1 = playerType("Player 1"); // THIS WAS EDITED!
+    let pokemon1 = playerType("Player 1"); 
     console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
 
     await delayTimer(1000);
@@ -89,34 +113,8 @@ async function startGame() {
     //turns
     while (playing == true) {
 
-        //player 1 turn
-        function player1turn(){
-            let attack = reader.question(`Choose your attack - ${pokemon1.attacks[0]}(1), ${pokemon1.attacks[1]}(2), ${pokemon1.attacks[2]}(3), ${pokemon1.attacks[3]}(4), ${pokemon1.attacks[4]}(5): `);
-    
-            var after_attack = console.log(`You used ${JSON.stringify(pokemon1.attacks[attack-1])}\n`);
-            switch(attack) {
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                    pokemon1.moves(pokemon2);
-                    break;
-                case '5':
-                    pokemon1.healing();
-                    break;
-                default:
-                    console.log("Choose a number between 1 and 5");
-                    player1turn(); 
-                    break; 
-            }
-    
-    
-            //Text display of attack used by User
-            after_attack;
-        }
 
-
-        player1turn();
+        playerturn(pokemon1, pokemon2);
 
         //check pokemon 2 hp
         pokemon2.checkHP();
@@ -173,7 +171,7 @@ async function startGame() {
 async function twoPlayerGame(){
     let playing = true;
 
-    //EDITS HERE TO FIX CHOOSING TYPE OF POKEMON, FROM THIS LINE ...
+    
     //choose player 1 pokemon
     console.log("Player 1:");
     let pokemon1 = playerType("Player 1");
@@ -188,36 +186,13 @@ async function twoPlayerGame(){
     //Player 2 chooses pokemon
     console.log("Player 2:");
     let pokemon2 = playerType("Player 2");
-    // ... TO THIS LINE!
+    
   
 
     while (playing == true) {
         //player 1 turn
-        // EDITS HERE TO FIX PLAYERTURN, FROM THIS LINE ...
-        function playerturn(attacker, target){
-            let attack = reader.question(`${attacker.player}:\nChoose your attack - ${attacker.attacks[0]}(1), ${attacker.attacks[1]}(2), ${attacker.attacks[2]}(3), ${attacker.attacks[3]}(4), ${attacker.attacks[4]}(5): `);
-    
-            var after_attack = console.log(`You used ${JSON.stringify(attacker.attacks[attack-1])}\n`);
-            switch(attack) {
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                    attacker.moves(target);
-                    break;
-                case '5':
-                    attacker.healing();
-                    break;
-                default:
-                    console.log("Choose a number between 1 and 5");
-                    playerturn(attacker, target); 
-                    break;
-             
-            }
-    
-            after_attack;
-        }
-        // ... TO THIS LINE
+        
+ 
 
         //call player1 turn
         playerturn(pokemon1, pokemon2);
