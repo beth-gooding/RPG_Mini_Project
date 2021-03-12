@@ -202,7 +202,9 @@ async function twoPlayerGame(){
     //Player 2 chooses pokemon
     console.log("Player 2:");
     let pokemon2 = playerType("Player 2");
-    
+    console.log(`You sent out ${pokemon2.type}\nYour HP: ${pokemon2.HP}\n` );
+
+    await delayTimer(1500);
   
 
     while (playing == true) {
