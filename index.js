@@ -21,18 +21,15 @@ async function delayTimer(ms) {
 
 
 function playerType(playerID) {
+    let j = 1;
     let newstring = `Choose your Pokemon - `
     for (let i of typesArray){
-        newstring = newstring + i +", ";
+        newstring = newstring + i+`(${j})` +", ";
+        j++
     }
     newstring = newstring + ":";
   let type = reader.question(newstring)
-    /*try { //there is a class called type
-        var pokemon1 = new Fire(playerID);
-    }
-    catch(err) {
-        console.log("broken")
-    }*/
+
   if (type == 1) {
       var pokemon1 = new Fire(playerID);
   } else if (type == 2) {
