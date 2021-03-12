@@ -5,7 +5,7 @@
                                                 - 
 */
 import reader from "readline-sync";
-import { Pokemon, Fire, Rock, Water, Grass } from "./pokemonModule.js";
+import { Pokemon, Fire, Rock, Water, Grass, typesArray, addNewType } from "./pokemonModule.js";
 
 function sleep(ms) {
   return new Promise((resolve) => {
@@ -13,6 +13,7 @@ function sleep(ms) {
     });
 }
 
+addNewType("Dragon");
 
 async function delayTimer(ms) {
   await sleep(ms)
@@ -20,8 +21,18 @@ async function delayTimer(ms) {
 
 
 function playerType(playerID) {
-  let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
-
+    let newstring = `Choose your Pokemon - `
+    for (let i of typesArray){
+        newstring = newstring + i +", ";
+    }
+    newstring = newstring + ":";
+  let type = reader.question(newstring)
+    /*try { //there is a class called type
+        var pokemon1 = new Fire(playerID);
+    }
+    catch(err) {
+        console.log("broken")
+    }*/
   if (type == 1) {
       var pokemon1 = new Fire(playerID);
   } else if (type == 2) {
@@ -87,6 +98,21 @@ function playerturn(attacker, target){
     after_attack;
 }
 
+function player1turn(pokemon1, pokemon2){
+    //call player1 turn
+    playerturn(pokemon1, pokemon2);
+  
+    //check pokemon 2 hp
+    pokemon2.checkHP();
+  
+    //show hp
+    console.log(`${pokemon1.player} HP: ${pokemon1.HP}, ${pokemon2.player} HP: ${pokemon2.HP}\n`);
+    if (pokemon2.playing == false){
+        playing = false;
+        playAgain();
+        
+    }
+}
 
 async function startGame() {
   
@@ -115,18 +141,7 @@ async function startGame() {
     while (playing == true) {
 
 
-        playerturn(pokemon1, pokemon2);
-
-        //check pokemon 2 hp
-        pokemon2.checkHP();
-    
-        //show hp
-        console.log(`Your HP: ${pokemon1.HP}, Computer HP: ${pokemon2.HP}\n`);
-        if (pokemon2.playing == false){
-            playing = false;
-            playAgain();
-            break;
-        }
+        player1turn(pokemon1, pokemon2);
 
         //time gap between turns
     
@@ -195,19 +210,7 @@ async function twoPlayerGame(){
         
  
 
-        //call player1 turn
-        playerturn(pokemon1, pokemon2);
-
-        //check pokemon 2 hp
-        pokemon2.checkHP();
-    
-        //show hp
-        console.log(`Player 1 HP: ${pokemon1.HP}, Player 2 HP: ${pokemon2.HP}\n`);
-        if (pokemon2.playing == false){
-            playing = false;
-            playAgain();
-            break;
-        }
+        player1turn(pokemon1, pokemon2);
 
 
         await delayTimer(1500);
@@ -239,3 +242,6 @@ async function twoPlayerGame(){
 }
 
 chooseGame();
+
+
+

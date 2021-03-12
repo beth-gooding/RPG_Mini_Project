@@ -62,3 +62,11 @@ export class Water extends Pokemon {
     this.player = player;
   }
 }
+
+export let typesArray = ["Fire", "Rock", "Grass", "Water"];
+
+export function addNewType(type) {
+  // Add type name to types array
+  typesArray.push(type);
+}
+
