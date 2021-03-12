@@ -17,7 +17,7 @@ async function delayTimer(ms) {
   await sleep(ms)
 }
 
-// EDITS HERE TO FIX PLAYERTYPE FUNCTION, FROM THIS LINE...
+
 function playerType(playerID) {
   let type = reader.question(`Choose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
 
@@ -35,9 +35,8 @@ function playerType(playerID) {
   }
 
   return pokemon1;
-
 }
-// TO THIS LINE!
+
 
 function playAgain() {
     let again = reader.question("Would you like another battle? yes/no: ");
@@ -93,7 +92,7 @@ async function startGame() {
 
     let playing = true;
     //choose player 1 pokemon
-    let pokemon1 = playerType("Player 1"); // THIS WAS EDITED!
+    let pokemon1 = playerType("Player 1"); 
     console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}` );
 
     await delayTimer(1000);
@@ -172,7 +171,7 @@ async function startGame() {
 async function twoPlayerGame(){
     let playing = true;
 
-    //EDITS HERE TO FIX CHOOSING TYPE OF POKEMON, FROM THIS LINE ...
+    
     //choose player 1 pokemon
     console.log("Player 1:");
     let pokemon1 = playerType("Player 1");
@@ -187,7 +186,7 @@ async function twoPlayerGame(){
     //Player 2 chooses pokemon
     console.log("Player 2:");
     let pokemon2 = playerType("Player 2");
-    // ... TO THIS LINE!
+    
   
 
     while (playing == true) {
