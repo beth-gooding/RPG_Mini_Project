@@ -37,7 +37,7 @@ export class Game implements GameI {
         this.gameType;
     }
 
-    async  startGame() {
+    async  startGame(): Promise<void> {
         let pokemon1 = this.player1.playerType("Player 1");
         console.log(`You sent out ${pokemon1.type}\nYour HP: ${pokemon1.HP}\n` );
         
@@ -127,7 +127,7 @@ export class Game implements GameI {
     }
 
 
-    chooseGame() {
+    chooseGame(): void {
         let choice = reader.question("Would you like to player 1-player (1) or 2-player (2)?: ");
         if (choice == '1') {
             this.gameType = "1 Player";   
@@ -140,7 +140,7 @@ export class Game implements GameI {
         this.startGame();
     }
 
-    playAgain() {
+    playAgain(): void {
         let again = reader.question("Would you like another battle? yes/no: ");
         if (again == "yes") {
             this.playing = true;
@@ -181,7 +181,7 @@ export class Player implements PlayerI{
       
       }
 
-      playerTurn(attacker: PokemonI, target: PokemonI){
+      playerTurn(attacker: PokemonI, target: PokemonI): void {
         let attack = reader.question(`${attacker.player}:\nChoose your attack - ${attacker.attacks[0]}(1), ${attacker.attacks[1]}(2), ${attacker.attacks[2]}(3), ${attacker.attacks[3]}(4), ${attacker.attacks[4]}(5): `);
 
         var after_attack = console.log(`You used ${JSON.stringify(attacker.attacks[attack-1])}\n`);
@@ -214,8 +214,8 @@ export class Timer implements TimerI {
         this.ms = ms;
     }
       
-      async delayTimer() {
-        async function sleep(duration) {
+      async delayTimer(): Promise<void> {
+        async function sleep(duration: number): Promise<void> {
             return new Promise((resolve) => {
             setTimeout(resolve, duration);
                 });
