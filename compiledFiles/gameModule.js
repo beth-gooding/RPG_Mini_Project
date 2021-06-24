@@ -15,7 +15,6 @@ export class Game {
         this.timer1500 = new Timer(1500);
         this.player1 = new Player();
         this.player2 = new Player();
-        //this.pokemon1 = this.player1.playerType();
         this.playing = true;
         this.gameType;
     }
@@ -48,7 +47,7 @@ export class Game {
             //turns
             while (this.playing == true) {
                 //player 1 turn
-                this.player1.playerturn(pokemon1, pokemon2);
+                this.player1.playerTurn(pokemon1, pokemon2);
                 //check pokemon 2 hp
                 pokemon2.checkHP();
                 //show hp
@@ -79,7 +78,7 @@ export class Game {
                     after_PC;
                 }
                 else if (this.gameType == "2 Player") {
-                    this.player2.playerturn(pokemon2, pokemon1);
+                    this.player2.playerTurn(pokemon2, pokemon1);
                 }
                 //Check pokemon1 HP
                 pokemon1.checkHP();
@@ -146,7 +145,7 @@ export class Player {
         }
         return pokemon;
     }
-    playerturn(attacker, target) {
+    playerTurn(attacker, target) {
         let attack = reader.question(`${attacker.player}:\nChoose your attack - ${attacker.attacks[0]}(1), ${attacker.attacks[1]}(2), ${attacker.attacks[2]}(3), ${attacker.attacks[3]}(4), ${attacker.attacks[4]}(5): `);
         var after_attack = console.log(`You used ${JSON.stringify(attacker.attacks[attack - 1])}\n`);
         switch (attack) {
@@ -161,7 +160,7 @@ export class Player {
                 break;
             default:
                 console.log("Choose a number between 1 and 5");
-                this.playerturn(attacker, target);
+                this.playerTurn(attacker, target);
                 break;
         }
         after_attack;

@@ -1,13 +1,38 @@
 import reader from "readline-sync";
-import { Fire, Grass, Water, Rock } from "./pokemonModule.js";
+import { PokemonI, Fire, Grass, Water, Rock } from "./pokemonModule.js";
 
-export class Game {
+interface TimerI {
+    ms: number;
+    delayTimer: () => void;
+}
+
+interface PlayerI {
+    playerType: (playerID: string) => PokemonI;
+    playerTurn: (attacker: PokemonI, target: PokemonI) => void;
+}
+
+interface GameI {
+    timer1000: TimerI;
+    timer1500: TimerI;
+    player1: PlayerI;
+    player2: PlayerI;
+    playing: boolean;
+    gameType?: string;
+}
+
+export class Game implements GameI {
+    timer1000: TimerI;
+    timer1500: TimerI;
+    player1: PlayerI;
+    player2: PlayerI;
+    playing: boolean;
+    gameType?: string;
+
     constructor() {
         this.timer1000 = new Timer(1000);
         this.timer1500 = new Timer(1500);
         this.player1 = new Player();
         this.player2 = new Player();
-        //this.pokemon1 = this.player1.playerType();
         this.playing = true;
         this.gameType;
     }
@@ -40,7 +65,7 @@ export class Game {
         while (this.playing == true) {
     
             //player 1 turn
-            this.player1.playerturn(pokemon1, pokemon2);
+            this.player1.playerTurn(pokemon1, pokemon2);
     
             //check pokemon 2 hp
             pokemon2.checkHP();
@@ -81,7 +106,7 @@ export class Game {
             //Text display of attack by Computer
             after_PC;
             } else if (this.gameType == "2 Player"){
-                this.player2.playerturn(pokemon2, pokemon1);
+                this.player2.playerTurn(pokemon2, pokemon1);
             }
     
             //Check pokemon1 HP
@@ -131,12 +156,12 @@ export class Game {
 
 // Player Class
 
-export class Player {
+export class Player implements PlayerI{
     constructor() {
 
     }
 
-    playerType(playerID) {
+    playerType(playerID: string): PokemonI {
         let type = reader.question(`${playerID}:\nChoose your Pokemon - Fire(1), Water(2), Grass(3), Rock(4): `)
       
         if (type == 1) {
@@ -156,7 +181,7 @@ export class Player {
       
       }
 
-      playerturn(attacker, target){
+      playerTurn(attacker: PokemonI, target: PokemonI){
         let attack = reader.question(`${attacker.player}:\nChoose your attack - ${attacker.attacks[0]}(1), ${attacker.attacks[1]}(2), ${attacker.attacks[2]}(3), ${attacker.attacks[3]}(4), ${attacker.attacks[4]}(5): `);
 
         var after_attack = console.log(`You used ${JSON.stringify(attacker.attacks[attack-1])}\n`);
@@ -172,7 +197,7 @@ export class Player {
                 break;
             default:
                 console.log("Choose a number between 1 and 5");
-                this.playerturn(attacker, target); 
+                this.playerTurn(attacker, target); 
                 break;
          
         }
@@ -183,8 +208,9 @@ export class Player {
 
 //Timer Class
 
-export class Timer {
-    constructor(ms) {
+export class Timer implements TimerI {
+    ms: number;
+    constructor(ms: number) {
         this.ms = ms;
     }
       

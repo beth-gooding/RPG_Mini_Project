@@ -1,4 +1,4 @@
-interface PokemonI {
+export interface PokemonI {
   type: string;
   HP: number;
   attacks: string[];
